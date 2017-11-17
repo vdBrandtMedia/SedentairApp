@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_ergonomics_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nl.vdbrandtmedia.sedentairapp.Ergonomics_home">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginTop="25dp">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="?attr/actionModeCloseDrawable"
+            android:id="@+id/imageButton"
+            android:background="@android:color/transparent"
+            android:layout_marginRight="16dp"
+            android:onClick="goToParent"/>
+
+        <TextView
+            android:id="@+id/toolbarTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@android:color/white"
+            android:text="Ergonomics"
+            android:layout_marginLeft="16dp"
+            android:gravity="left" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="100dp">
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <TextView
+                    android:text="Sitting Pose"
+                    android:layout_width="match_parent"
+                    android:id="@+id/Sitting"
+                    android:gravity="center"
+                    android:background="@drawable/ergonomics_sitting_pose"
+                    android:layout_marginBottom="16dp"
+                    android:layout_height="110dp" />
+
+                <TextView
+                    android:text="Equipment"
+                    android:layout_width="match_parent"
+                    android:id="@+id/Equipment"
+                    android:gravity="center"
+                    android:background="@drawable/ergonomics_equipment"
+                    android:layout_marginBottom="16dp"
+                    android:layout_height="110dp" />
+
+                <TextView
+                    android:text="Standing Pose"
+                    android:layout_width="match_parent"
+                    android:id="@+id/Standing"
+                    android:gravity="center"
+                    android:background="@drawable/ergonomics_standing_pose"
+                    android:layout_marginBottom="16dp"
+                    android:layout_height="110dp" />
+
+                <TextView
+                    android:text="Sitting Pose"
+                    android:layout_width="match_parent"
+                    android:id="@+id/Sitting2"
+                    android:gravity="center"
+                    android:background="@drawable/ergonomics_sitting_pose"
+                    android:layout_marginBottom="16dp"
+                    android:layout_height="110dp" />
+
+                <TextView
+                    android:text="Equipment"
+                    android:layout_width="match_parent"
+                    android:id="@+id/Equipment2"
+                    android:gravity="center"
+                    android:background="@drawable/ergonomics_equipment"
+                    android:layout_marginBottom="16dp"
+                    android:layout_height="110dp" />
+
+                <TextView
+                    android:text="Standing Pose"
+                    android:layout_width="match_parent"
+                    android:id="@+id/Standing2"
+                    android:gravity="center"
+                    android:background="@drawable/ergonomics_standing_pose"
+                    android:layout_marginBottom="16dp"
+                    android:layout_height="110dp" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

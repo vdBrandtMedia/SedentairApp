@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_schedule"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nl.vdbrandtmedia.sedentairapp.Schedule">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginTop="25dp">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="?attr/actionModeCloseDrawable"
+            android:id="@+id/homeBtn"
+            android:background="@android:color/transparent"
+            android:layout_marginRight="16dp"
+            android:onClick="goToParent"/>
+
+        <TextView
+            android:id="@+id/toolbarTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@android:color/white"
+            android:text="Schedule"
+            android:layout_marginLeft="16dp"
+            android:gravity="left" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <!-- A RecyclerView with some commonly used attributes -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MyActivity">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/cardList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
+
