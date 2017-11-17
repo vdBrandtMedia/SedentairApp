@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,4 +71,5 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
             vTimerBool = (Switch) v.findViewById(R.id.scheduleBool);
         }
     }
+
 }

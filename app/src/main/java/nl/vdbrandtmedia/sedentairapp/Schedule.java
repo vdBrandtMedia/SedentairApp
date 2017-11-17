@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Schedule extends AppCompatActivity {
 
 
@@ -28,6 +31,27 @@ public class Schedule extends AppCompatActivity {
         recList.setLayoutManager(llm);
 
         setTitle("Schedule");
+
+        ScheduleAdapter ca = new ScheduleAdapter(createList(50));
+        recList.setAdapter(ca);
+    }
+
+
+    private List createList(int size) {
+
+        List result = new ArrayList();
+        for (int i=1; i <= size; i++) {
+            ScheduleAdapter.ScheduleInfo ci = new ScheduleAdapter.ScheduleInfo();
+            ci.day = ScheduleAdapter.ScheduleInfo.DAY_PREFIX + i;
+            ci.time = ScheduleAdapter.ScheduleInfo.TIME_PREFIX + i;
+            ci.timerName = ScheduleAdapter.ScheduleInfo.TIMERNAME_PREFIX + i;
+            ci.timerBool = ScheduleAdapter.ScheduleInfo.TIMERBOOL_PREFIX;
+
+            result.add(ci);
+
+        }
+
+        return result;
     }
 
     //implement fragments for multiple time events
