@@ -1,11 +1,8 @@
 package nl.vdbrandtmedia.sedentairapp;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,14 +10,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 import java.util.Objects;
 
-import nl.vdbrandtmedia.sedentairapp.fragments.ErgonomicsFragment;
-import nl.vdbrandtmedia.sedentairapp.fragments.HomeFragment;
-import nl.vdbrandtmedia.sedentairapp.fragments.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -70,49 +63,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 2000);
     }
-
-     /*
-     void menuButtonClick(View v){
-        switch (v.getId()){
-            case R.id.homeBtn:
-                HomeFragment homeFrag = new HomeFragment();
-
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.myFragment,  homeFrag);
-                //fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-
-                activeFragment = "Home";
-                break;
-
-            case R.id.settingBtn:
-                SettingsFragment settingFrag = new SettingsFragment();
-
-                FragmentManager fragmentManager1 = getFragmentManager();
-                FragmentTransaction fragmentTransaction1 = fragmentManager1.beginTransaction();
-                fragmentTransaction1.replace(R.id.myFragment,  settingFrag);
-                //fragmentTransaction.addToBackStack(null);
-                fragmentTransaction1.commit();
-
-                activeFragment = "Settings";
-                break;
-
-
-            case R.id.ErgonomicsBtn:
-                ErgonomicsFragment ergoFrag = new ErgonomicsFragment();
-
-                FragmentManager fragmentManager2 = getFragmentManager();
-                FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
-                fragmentTransaction2.replace(R.id.myFragment, ergoFrag);
-                //fragmentTransaction2.addToBackStack(null);
-                fragmentTransaction2.commit();
-
-                activeFragment = "Ergonomics";
-                break;
-        }
-    }
-    */
 
     public void menuButtonClick(View v) {
         switch (v.getId()) {

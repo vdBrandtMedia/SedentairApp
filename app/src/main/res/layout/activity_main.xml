@@ -6,20 +6,81 @@
     android:layout_height="match_parent"
     tools:context="nl.vdbrandtmedia.sedentairapp.MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginTop="25dp">
 
+        <TextView
+            android:id="@+id/toolbarTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@android:color/white"
+            android:text="@string/home"
+            android:layout_marginLeft="16dp"
+            android:gravity="left" />
+
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp">
 
-        <fragment
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="nl.vdbrandtmedia.sedentairapp.fragments.HomeFragment"
-            android:id="@+id/myFragment"
-            tools:layout="@layout/fragment_home"
-            android:layout_marginTop="60dp" />
+            android:layout_weight="1">
+
+            <Button
+                android:text="Settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/settingBtn"
+                android:layout_weight="1"
+                android:elevation="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="12sp"
+                android:onClick="menuButtonClick"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:textColor="#222" />
+
+            <Button
+                android:text="Schedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/scheduleBtn"
+                android:layout_weight="1"
+                android:elevation="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="12sp"
+                android:onClick="menuButtonClick"
+                android:layout_marginTop="19dp"
+                android:layout_below="@+id/ErgonomicsBtn"
+                android:layout_centerHorizontal="true"
+                android:textColor="#222" />
+
+            <Button
+                android:text="Ergonomics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ErgonomicsBtn"
+                android:layout_weight="1"
+                android:elevation="1dp"
+                android:layout_marginRight="16dp"
+                android:textSize="12sp"
+                android:onClick="menuButtonClick"
+                android:layout_marginTop="22dp"
+                android:layout_below="@+id/settingBtn"
+                android:layout_alignStart="@+id/scheduleBtn"
+                android:textColor="#222" />
+        </RelativeLayout>
 
     </LinearLayout>
 </RelativeLayout>
