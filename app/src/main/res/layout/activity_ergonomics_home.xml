@@ -17,10 +17,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="?attr/actionModeCloseDrawable"
-            android:id="@+id/imageButton"
+            android:id="@+id/homeButton"
             android:background="@android:color/transparent"
             android:layout_marginRight="16dp"
-            android:onClick="goToParent"/>
+            android:onClick="menuButtonClick"/>
 
         <TextView
             android:id="@+id/toolbarTitle"

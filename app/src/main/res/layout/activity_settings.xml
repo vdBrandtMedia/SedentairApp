@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_settings"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,15 +13,24 @@
         android:layout_height="?android:attr/actionBarSize"
         android:layout_marginTop="25dp">
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="?attr/actionModeCloseDrawable"
+            android:id="@+id/homeButton"
+            android:background="@android:color/transparent"
+            android:layout_marginRight="16dp"
+            android:onClick="menuButtonClick"/>
+
         <TextView
             android:id="@+id/toolbarTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:textColor="@android:color/white"
-            android:text="@string/home"
             android:layout_marginLeft="16dp"
-            android:gravity="left" />
+            android:gravity="left"
+            android:text="@string/home"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -34,38 +44,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <RelativeLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView"
                     android:layout_marginLeft="16dp"
-                    android:textStyle="bold"
                     android:layout_marginTop="16dp"
                     android:text="@string/notifications"
-                    android:textSize="22sp" />
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:text="@string/push_notifications"
+                    android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView2"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/textView"
+                    android:layout_marginBottom="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="25dp"
-                    android:layout_below="@+id/textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="16dp" />
+                    android:text="@string/push_notifications" />
 
                 <CheckBox
+                    android:id="@+id/checkBox5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/checkBox5"
                     android:layout_alignBaseline="@+id/textView2"
                     android:layout_alignBottom="@+id/textView2"
                     android:layout_alignParentEnd="true"
@@ -74,72 +84,71 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:background="@color/dividerLine"
                 android:id="@+id/divider1"
-                android:layout_height="0.3dp">
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="@color/dividerLine">
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
-                    android:text="@string/sound"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/textView3"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp" />
-
-                <TextView
-                    android:text="@string/test_mp3"
-                    android:layout_below="@id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/sound" />
+
+                <TextView
                     android:id="@+id/textView4"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:textSize="18sp"
-                    android:textColor="@color/theme1TextUnder" />
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/checkBox2"
-                    android:layout_marginEnd="32dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentEnd="true" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:background="@color/dividerLine"
-                android:id="@+id/divider2"
-                android:layout_height="0.3dp">
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:text="@string/vibration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Standing"
-                    android:layout_marginLeft="16dp"
+                    android:layout_below="@id/textView3"
                     android:layout_marginBottom="16dp"
-                    android:layout_marginTop="16dp" />
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/test_mp3"
+                    android:textColor="@color/theme1TextUnder"
+                    android:textSize="18sp" />
 
                 <CheckBox
+                    android:id="@+id/checkBox2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="32dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="@color/dividerLine"></RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Standing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/vibration" />
+
+                <CheckBox
                     android:id="@+id/checkBox3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/Standing"
                     android:layout_alignBottom="@+id/Standing"
                     android:layout_alignParentEnd="true"
@@ -148,106 +157,105 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:background="@color/dividerLine"
                 android:id="@+id/divider3"
-                android:layout_height="0.3dp">
-            </RelativeLayout>
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="@color/dividerLine"></RelativeLayout>
 
             <RelativeLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView7"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="16dp"
-                    android:textStyle="bold"
                     android:layout_marginTop="16dp"
                     android:text="@string/app_color"
-                    android:layout_marginBottom="10dp"
-                    android:textSize="22sp" />
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_below="@+id/textView7"
                     android:layout_marginBottom="10dp"
-                    android:layout_below="@+id/textView7">
+                    android:orientation="horizontal">
 
                     <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:id="@+id/checkBox8"
-                        android:layout_weight="0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="16dp" />
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="0" />
 
                     <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:id="@+id/checkBox7"
-                        android:layout_weight="0"
-                        android:layout_marginRight="16dp" />
-
-                    <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="0" />
+
+                    <CheckBox
                         android:id="@+id/checkBox6"
-                        android:layout_weight="0"
-                        android:layout_marginRight="16dp" />
-
-                    <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="0" />
+
+                    <CheckBox
                         android:id="@+id/checkBox4"
-                        android:layout_weight="0"
-                        android:layout_marginRight="16dp" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="0" />
                 </LinearLayout>
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:background="@color/dividerLine"
                 android:id="@+id/divider4"
-                android:layout_height="0.3dp">
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="@color/dividerLine">
 
             </RelativeLayout>
 
 
             <RelativeLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView9"
                     android:layout_marginLeft="16dp"
-                    android:textStyle="bold"
                     android:layout_marginTop="16dp"
                     android:text="App Rights"
-                    android:textSize="22sp" />
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:text="@string/push_notifications"
+                    android:id="@+id/textView10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView10"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/textView9"
+                    android:layout_marginBottom="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="25dp"
-                    android:layout_below="@+id/textView9"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="16dp" />
+                    android:text="@string/push_notifications" />
 
                 <CheckBox
+                    android:id="@+id/checkBox9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/checkBox9"
                     android:layout_alignBaseline="@+id/textView10"
                     android:layout_alignBottom="@+id/textView10"
                     android:layout_alignParentEnd="true"
@@ -256,31 +264,31 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:background="@color/dividerLine"
                 android:id="@+id/divider5"
-                android:layout_height="0.3dp">
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="@color/dividerLine">
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
-                    android:text="Sound"
+                    android:id="@+id/textView11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView11"
-                    android:layout_marginLeft="16dp"
                     android:layout_marginBottom="16dp"
-                    android:layout_marginTop="16dp" />
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Sound" />
 
                 <CheckBox
+                    android:id="@+id/checkBox10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/checkBox10"
                     android:layout_alignBaseline="@+id/textView11"
                     android:layout_alignBottom="@+id/textView11"
                     android:layout_alignParentEnd="true"
@@ -289,30 +297,29 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:background="@color/dividerLine"
                 android:id="@+id/divider6"
-                android:layout_height="0.3dp">
-            </RelativeLayout>
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="@color/dividerLine"></RelativeLayout>
 
             <RelativeLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
-                    android:text="Audio files"
+                    android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView12"
-                    android:layout_marginLeft="16dp"
                     android:layout_marginBottom="16dp"
-                    android:layout_marginTop="16dp" />
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Audio files" />
 
                 <CheckBox
+                    android:id="@+id/checkBox12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/checkBox12"
                     android:layout_alignBaseline="@+id/textView12"
                     android:layout_alignBottom="@+id/textView12"
                     android:layout_alignParentEnd="true"
@@ -321,17 +328,15 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:background="@color/dividerLine"
                 android:id="@+id/divider7"
-                android:layout_height="0.3dp">
-            </RelativeLayout>
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="@color/dividerLine"></RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/finalPadding"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:id="@+id/finalPadding">
-            </RelativeLayout>
+                android:layout_height="30dp"></RelativeLayout>
 
 
         </LinearLayout>

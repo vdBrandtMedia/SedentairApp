@@ -23,8 +23,15 @@ public class Ergonomics_home extends AppCompatActivity {
 //        setTitle("Ergonomics");
     }
 
-    public void goToParent(View view) {
-        Intent intent = new Intent(this, this.getParent().getClass());
+    public void menuButtonClick(View v) {
+        switch (v.getId()) {
+            case R.id.homeButton:
+                newIntent(new Intent(this, MainActivity.class));
+                break;
+        }
+    }
+
+    public void newIntent(Intent intent){
         startActivity(intent);
     }
 }

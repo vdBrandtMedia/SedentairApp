@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_schedule"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="nl.vdbrandtmedia.sedentairapp.Schedule">
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/toolbar"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="54dp"
+        android:layout_marginEnd="24dp"
+        app:fabSize="normal"
+        app:layout_anchorGravity="bottom|right|end"
+        app:srcCompat="@drawable/plus_icon_small" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -12,23 +26,33 @@
         android:layout_height="?android:attr/actionBarSize"
         android:layout_marginTop="25dp">
 
+        <ImageButton
+            android:id="@+id/homeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:background="@android:color/transparent"
+            android:onClick="menuButtonClick"
+            app:srcCompat="?attr/actionModeCloseDrawable" />
+
         <TextView
             android:id="@+id/toolbarTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:textColor="@android:color/white"
-            android:text="Schedule"
             android:layout_marginLeft="16dp"
-            android:gravity="left" />
+            android:gravity="left"
+            android:text="Schedule"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
 
     </android.support.v7.widget.Toolbar>
 
     <!-- A RecyclerView with some commonly used attributes -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="100dp">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -45,5 +69,5 @@
 
     </ScrollView>
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
 

@@ -10,9 +10,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+
+import org.w3c.dom.Text;
 
 import java.util.Objects;
+import nl.vdbrandtmedia.sedentairapp.Config;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             Window w = getWindow(); // in Activity's onCreate() for instance
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
- 
+
         activeFragment = "HOME";
     }
 

@@ -80,6 +80,7 @@
                 android:layout_below="@+id/settingBtn"
                 android:layout_alignStart="@+id/scheduleBtn"
                 android:textColor="#222" />
+
         </RelativeLayout>
 
     </LinearLayout>

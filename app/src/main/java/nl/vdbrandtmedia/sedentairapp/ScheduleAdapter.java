@@ -51,9 +51,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         protected String time;
         protected String timerName;
         protected Boolean timerBool;
-        protected static final String DAY_PREFIX = "Name_";
-        protected static final String TIME_PREFIX = "Surname_";
-        protected static final String TIMERNAME_PREFIX = "email_";
+        protected static final String DAY_PREFIX = "Monday";
+        protected static final String TIME_PREFIX = "10:00 - 11:00";
+        protected static final String TIMERNAME_PREFIX = "meeting ";
         protected static final Boolean TIMERBOOL_PREFIX = true;
     }
 
@@ -65,10 +65,10 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
         public ScheduleViewHolder(View v) {
             super(v);
-            vDay =  (TextView) v.findViewById(R.id.day);
-            vTime = (TextView)  v.findViewById(R.id.time);
-            vTimerName = (TextView)  v.findViewById(R.id.timerName);
-            vTimerBool = (Switch) v.findViewById(R.id.scheduleBool);
+            vDay =  (TextView)      v.findViewById(R.id.day);
+            vTime = (TextView)      v.findViewById(R.id.time);
+            vTimerName = (TextView) v.findViewById(R.id.timerName);
+            vTimerBool = (Switch)   v.findViewById(R.id.scheduleBool);
         }
     }
 

@@ -1,16 +1,19 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@android:color/transparent"
+    android:layout_marginBottom="5dp"
+    card_view:cardPreventCornerOverlap="false"
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark">
-
-
+        android:background="@android:color/transparent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -28,13 +31,13 @@
                 android:layout_centerVertical="false"
                 android:layout_alignParentEnd="false"
                 android:layout_width="120dp"
-                android:gravity="left" />
+                android:gravity="left"
+                android:textSize="20sp" />
 
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/scheduleBool"
-                android:layout_weight="0"
                 android:gravity="center_vertical|end"
                 android:layout_alignParentEnd="true"
                 android:layout_alignBaseline="@+id/day" />
@@ -46,29 +49,40 @@
                 android:layout_width="120dp"
                 android:layout_alignParentBottom="false"
                 android:layout_marginStart="94dp"
-                android:layout_alignParentLeft="true" />
+                android:layout_alignParentLeft="true"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="1">
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="32dp">
 
             <TextView
                 android:id="@+id/timerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="6dp"
                 android:gravity="center_vertical"
                 android:text="Meeting"
                 android:textSize="16sp"
-                android:layout_weight="0.5"
                 android:layout_marginBottom="16dp" />
 
-        </LinearLayout>
+            <ImageView
+                android:layout_height="24dp"
+                android:id="@+id/imageView"
+                android:gravity="center_vertical|end"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="CardNav"
+                card_view:srcCompat="@drawable/pen_icon"
+                android:layout_width="24dp" />
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

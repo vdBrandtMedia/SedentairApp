@@ -1,10 +1,12 @@
 package nl.vdbrandtmedia.sedentairapp;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -32,7 +34,7 @@ public class Schedule extends AppCompatActivity {
 
         setTitle("Schedule");
 
-        ScheduleAdapter ca = new ScheduleAdapter(createList(50));
+        ScheduleAdapter ca = new ScheduleAdapter(createList(20));
         recList.setAdapter(ca);
     }
 
@@ -40,10 +42,10 @@ public class Schedule extends AppCompatActivity {
     private List createList(int size) {
 
         List result = new ArrayList();
-        for (int i=1; i <= size; i++) {
+        for (int i = 1; i <= size; i++) {
             ScheduleAdapter.ScheduleInfo ci = new ScheduleAdapter.ScheduleInfo();
-            ci.day = ScheduleAdapter.ScheduleInfo.DAY_PREFIX + i;
-            ci.time = ScheduleAdapter.ScheduleInfo.TIME_PREFIX + i;
+            ci.day = ScheduleAdapter.ScheduleInfo.DAY_PREFIX;
+            ci.time = ScheduleAdapter.ScheduleInfo.TIME_PREFIX;
             ci.timerName = ScheduleAdapter.ScheduleInfo.TIMERNAME_PREFIX + i;
             ci.timerBool = ScheduleAdapter.ScheduleInfo.TIMERBOOL_PREFIX;
 
@@ -54,5 +56,15 @@ public class Schedule extends AppCompatActivity {
         return result;
     }
 
-    //implement fragments for multiple time events
+    public void menuButtonClick(View v) {
+        switch (v.getId()) {
+            case R.id.homeButton:
+                newIntent(new Intent(this, MainActivity.class));
+                break;
+        }
+    }
+
+    public void newIntent(Intent intent) {
+        startActivity(intent);
+    }
 }
