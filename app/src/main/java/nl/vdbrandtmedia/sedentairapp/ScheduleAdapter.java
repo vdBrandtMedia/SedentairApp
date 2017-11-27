@@ -11,10 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Lex van den Brandt on 14-11-2017.
- */
-
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder>{
 
     private List<ScheduleInfo> contactList;
@@ -33,7 +29,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         ScheduleInfo ci = contactList.get(i);
         contactViewHolder.vDay.setText(ci.day);
         contactViewHolder.vTime.setText(ci.time);
-        contactViewHolder.vTimerName.setText(ci.timerName);
+        contactViewHolder.vTimerDay.setText(ci.timerDay);
         contactViewHolder.vTimerBool.setChecked(ci.timerBool);
     }
 
@@ -49,25 +45,25 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     public static class ScheduleInfo {
         protected String day;
         protected String time;
-        protected String timerName;
+        protected String timerDay;
         protected Boolean timerBool;
         protected static final String DAY_PREFIX = "Monday";
-        protected static final String TIME_PREFIX = "10:00 - 11:00";
-        protected static final String TIMERNAME_PREFIX = "meeting ";
+        protected static final String TIME_PREFIX = "10:00";
+        protected static final String TIMERDAY_PREFIX = "meeting ";
         protected static final Boolean TIMERBOOL_PREFIX = true;
     }
 
     public static class ScheduleViewHolder extends RecyclerView.ViewHolder {
         protected TextView vDay;
         protected TextView vTime;
-        protected TextView vTimerName;
+        protected TextView vTimerDay;
         protected Switch vTimerBool;
 
         public ScheduleViewHolder(View v) {
             super(v);
             vDay =  (TextView)      v.findViewById(R.id.day);
             vTime = (TextView)      v.findViewById(R.id.time);
-            vTimerName = (TextView) v.findViewById(R.id.timerName);
+            vTimerDay = (TextView) v.findViewById(R.id.timerName);
             vTimerBool = (Switch)   v.findViewById(R.id.scheduleBool);
         }
     }
