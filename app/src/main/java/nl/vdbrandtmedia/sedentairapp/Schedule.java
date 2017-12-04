@@ -52,7 +52,7 @@ public class Schedule extends AppCompatActivity {
     private List createList(int size, ArrayList<String> arrayList) {
         List result = new ArrayList();
 
-        for (String object: arrayList) {
+        /*for (String object: arrayList) {
             ScheduleAdapter.ScheduleInfo ci = new ScheduleAdapter.ScheduleInfo();
             ci.day =        object;
             ci.time =       object;
@@ -60,7 +60,7 @@ public class Schedule extends AppCompatActivity {
             ci.timerBool =  Boolean.valueOf(object);
 
             result.add(ci);
-        }
+        }*/
 
         for (int i = 1; i <= size; i++) {
             ScheduleAdapter.ScheduleInfo ci = new ScheduleAdapter.ScheduleInfo();

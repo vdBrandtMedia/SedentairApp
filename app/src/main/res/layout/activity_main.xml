@@ -40,7 +40,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/settingBtn"
-                android:layout_weight="1"
                 android:elevation="1dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
@@ -55,7 +54,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/scheduleBtn"
-                android:layout_weight="1"
                 android:elevation="1dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
@@ -71,7 +69,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/ErgonomicsBtn"
-                android:layout_weight="1"
                 android:elevation="1dp"
                 android:layout_marginRight="16dp"
                 android:textSize="12sp"
@@ -80,6 +77,19 @@
                 android:layout_below="@+id/settingBtn"
                 android:layout_alignStart="@+id/scheduleBtn"
                 android:textColor="#222" />
+
+            <Button
+                android:text="Notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Notification"
+                android:elevation="1dp"
+                android:layout_marginRight="16dp"
+                android:textSize="12sp"
+                android:textColor="#222"
+                android:layout_below="@+id/scheduleBtn"
+                android:layout_alignStart="@+id/scheduleBtn"
+                android:layout_marginTop="95dp" />
 
         </RelativeLayout>
 

@@ -1,9 +1,13 @@
 package nl.vdbrandtmedia.sedentairapp;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews;
 
 import java.util.Objects;
 
@@ -20,11 +25,32 @@ public class MainActivity extends AppCompatActivity {
     public boolean doubleBackToExitPressedOnce;
     public LinearLayout homeBtn;
 
+    private android.support.v7.app.NotificationCompat.Builder builder;
+    private NotificationManager notificationManager;
+    private int notification_id;
+    private RemoteViews remoteViews;
+    private Context context;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        context = this;
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        remoteViews = new RemoteViews(getPackageName(), R.layout.custom_notification);
+
+        remoteViews.setImageViewResource(R.id.notif_icon, R.mipmap.ic_launcher);
+        remoteViews.setTextViewText(R.id.notif_title, "App name");
+        remoteViews.setTextViewText(R.id.notif_text, "How are you feeling today?");
+
+        notification_id = (int) System.currentTimeMillis();
+        Intent button_intent = new Intent("button_clicked");
+        button_intent.putExtra("id", notification_id);
+
+        PendingIntent p_button_intent = PendingIntent.getBroadcast(context, 123, button_intent, 0);
+        remoteViews.setOnClickPendingIntent(R.id.Notification, p_button_intent);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow(); // in Activity's onCreate() for instance
@@ -33,9 +59,27 @@ public class MainActivity extends AppCompatActivity {
 
         Config.writeSharedPreferences(this, "scheduleName1", "test1");
 
-        Log.d("test: ","value: " + Config.readSharedPreferences(this, "scheduleName1"));
+        Log.d("test: ", "value: " + Config.readSharedPreferences(this, "scheduleName1"));
 
         activeFragment = "HOME";
+
+        findViewById(R.id.Notification).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent notification_intent = new Intent(context, MainActivity.class);
+                PendingIntent pendingIntent = PendingIntent
+                        .getActivity(context, 0, notification_intent, 0);
+
+                builder = new NotificationCompat.Builder(context);
+                builder.setSmallIcon(R.mipmap.ic_launcher)
+                        .setAutoCancel(true)
+                        .setCustomContentView(remoteViews)
+                        .setContentIntent(pendingIntent);
+
+                notificationManager.notify(notification_id, builder.build());
+            }
+        });
+
     }
 
     @Override
@@ -45,10 +89,9 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-        if (Objects.equals(activeFragment, "Home")){
+        if (Objects.equals(activeFragment, "Home")) {
             menuButtonClick(homeBtn);
-        } else
-        {
+        } else {
             this.doubleBackToExitPressedOnce = true;
             Snackbar mySnackbar = Snackbar.make(findViewById(R.id.activity_main),
                     "Please click BACK again to exit the app \r\n", Snackbar.LENGTH_SHORT);
@@ -57,12 +100,11 @@ public class MainActivity extends AppCompatActivity {
             mySnackbar.show();
         }
 
-
         new Handler().postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }
@@ -81,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void newIntent(Intent intent){
+    public void newIntent(Intent intent) {
         startActivity(intent);
     }
 }

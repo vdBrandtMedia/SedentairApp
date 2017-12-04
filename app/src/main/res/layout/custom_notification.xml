@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="horizontal"
+    android:layout_height="64dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/notif_icon"
+        android:layout_alignTop="@+id/notif_btn"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/notif_title"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/notif_text"
+        android:layout_toEndOf="@+id/notif_icon"
+        android:paddingLeft="24dp"
+        android:paddingTop="14dp" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="35dp"
+        android:id="@+id/notif_btn" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/notif_text"
+        android:paddingLeft="24dp"
+        android:layout_below="@+id/notif_title"
+        android:layout_toEndOf="@+id/notif_icon"
+        android:layout_marginTop="4dp" />
+
+</RelativeLayout>
