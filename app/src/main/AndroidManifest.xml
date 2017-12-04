@@ -24,7 +24,6 @@
         <activity android:name=".Ergonomics_home"
             android:parentActivityName=".MainActivity" />
 
-
         <receiver android:name="Button_listener">
             <intent-filter>
                 <action android:name="button_clicked"/>

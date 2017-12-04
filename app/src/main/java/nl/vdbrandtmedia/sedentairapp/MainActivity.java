@@ -37,11 +37,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //remove top bar from activity
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow(); // in Activity's onCreate() for instance
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+
         context = this;
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         remoteViews = new RemoteViews(getPackageName(), R.layout.custom_notification);
 
-        remoteViews.setImageViewResource(R.id.notif_icon, R.mipmap.ic_launcher);
+        remoteViews.setImageViewResource(R.id.notif_icon, R.mipmap.ic_launcher2);
         remoteViews.setTextViewText(R.id.notif_title, "App name");
         remoteViews.setTextViewText(R.id.notif_text, "How are you feeling today?");
 
@@ -49,21 +55,10 @@ public class MainActivity extends AppCompatActivity {
         Intent button_intent = new Intent("button_clicked");
         button_intent.putExtra("id", notification_id);
 
-        PendingIntent p_button_intent = PendingIntent.getBroadcast(context, 123, button_intent, 0);
-        remoteViews.setOnClickPendingIntent(R.id.Notification, p_button_intent);
+        PendingIntent p_button_intent = PendingIntent.getBroadcast(context, 123, button_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        remoteViews.setOnClickPendingIntent(R.id.notif_btn, p_button_intent);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow(); // in Activity's onCreate() for instance
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
-
-        Config.writeSharedPreferences(this, "scheduleName1", "test1");
-
-        Log.d("test: ", "value: " + Config.readSharedPreferences(this, "scheduleName1"));
-
-        activeFragment = "HOME";
-
-        findViewById(R.id.Notification).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.notification_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent notification_intent = new Intent(context, MainActivity.class);
@@ -80,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Config.writeSharedPreferences(this, "scheduleName1", "test1");
+        Log.d("test: ", "value: " + Config.readSharedPreferences(this, "scheduleName1"));
+
+        activeFragment = "HOME";
     }
 
     @Override
@@ -112,13 +111,13 @@ public class MainActivity extends AppCompatActivity {
     public void menuButtonClick(View v) {
         switch (v.getId()) {
             case R.id.settingBtn:
-                newIntent(new Intent(this, Settings.class));
+                newIntent(new Intent(context, Settings.class));
                 break;
             case R.id.scheduleBtn:
-                newIntent(new Intent(this, Schedule.class));
+                newIntent(new Intent(context, Schedule.class));
                 break;
             case R.id.ErgonomicsBtn:
-                newIntent(new Intent(this, Ergonomics_home.class));
+                newIntent(new Intent(context, Ergonomics_home.class));
                 break;
         }
     }

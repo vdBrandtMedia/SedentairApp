@@ -8,4 +8,9 @@
     <color name="theme1Text">#fff</color>
     <color name="theme1TextUnder">#e8e8e8</color>
     <color name="dividerLine">#fff</color>
+
+
+    <!--Notification-->
+    <color name="notificationBar">#fff</color>
+    <color name="notificationText">#222</color>
 </resources>
