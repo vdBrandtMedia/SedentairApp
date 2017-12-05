@@ -7,4 +7,6 @@
     <string name="vibration">Vibration</string>
     <string name="app_color">App Color</string>
     <string name="home">Home</string>
+    <string name="notif_txt_cancel"><u>Got it!</u></string>
+    <string name="notif_txt_info"><u>More info</u></string>
 </resources>

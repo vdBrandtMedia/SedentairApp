@@ -13,4 +13,5 @@
     <!--Notification-->
     <color name="notificationBar">#fff</color>
     <color name="notificationText">#222</color>
+    <color name="notifictionButtons">#555</color>
 </resources>

@@ -1,5 +1,6 @@
 package nl.vdbrandtmedia.sedentairapp;
 
+import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -7,17 +8,19 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 
+import java.util.Calendar;
 import java.util.Objects;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private int notification_id;
     private RemoteViews remoteViews;
     private Context context;
+    Button button;
 
 
     @Override
@@ -43,35 +47,13 @@ public class MainActivity extends AppCompatActivity {
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
 
+        button = (Button) findViewById(R.id.button);
         context = this;
-        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        remoteViews = new RemoteViews(getPackageName(), R.layout.custom_notification);
 
-        remoteViews.setImageViewResource(R.id.notif_icon, R.mipmap.ic_launcher2);
-        remoteViews.setTextViewText(R.id.notif_title, "App name");
-        remoteViews.setTextViewText(R.id.notif_text, "How are you feeling today?");
-
-        notification_id = (int) System.currentTimeMillis();
-        Intent button_intent = new Intent("button_clicked");
-        button_intent.putExtra("id", notification_id);
-
-        PendingIntent p_button_intent = PendingIntent.getBroadcast(context, 123, button_intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        remoteViews.setOnClickPendingIntent(R.id.notif_btn, p_button_intent);
-
-        findViewById(R.id.notification_btn).setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent notification_intent = new Intent(context, MainActivity.class);
-                PendingIntent pendingIntent = PendingIntent
-                        .getActivity(context, 0, notification_intent, 0);
-
-                builder = new NotificationCompat.Builder(context);
-                builder.setSmallIcon(R.mipmap.ic_launcher)
-                        .setAutoCancel(true)
-                        .setCustomContentView(remoteViews)
-                        .setContentIntent(pendingIntent);
-
-                notificationManager.notify(notification_id, builder.build());
+            public void onClick(View v) {
+                setAlarmManager(15,10);
             }
         });
 
@@ -79,6 +61,17 @@ public class MainActivity extends AppCompatActivity {
         Log.d("test: ", "value: " + Config.readSharedPreferences(this, "scheduleName1"));
 
         activeFragment = "HOME";
+
+    }
+
+    public void setAlarmManager(int hour, int min){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,hour);
+        calendar.set(Calendar.MINUTE,min);
+        Intent intent = new Intent(context,NotificationReciever.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
     }
 
     @Override

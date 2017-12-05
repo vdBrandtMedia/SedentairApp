@@ -20,7 +20,8 @@
             android:id="@+id/homeButton"
             android:background="@android:color/transparent"
             android:layout_marginRight="16dp"
-            android:onClick="menuButtonClick"/>
+            android:onClick="menuButtonClick"
+            android:contentDescription="Back Button" />
 
         <TextView
             android:id="@+id/toolbarTitle"
@@ -100,20 +101,11 @@
                     android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/sound" />
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/textView3"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:text="@string/test_mp3"
-                    android:textColor="@color/theme1TextUnder"
-                    android:textSize="18sp" />
 
                 <CheckBox
                     android:id="@+id/checkBox2"
@@ -129,7 +121,7 @@
                 android:id="@+id/divider2"
                 android:layout_width="match_parent"
                 android:layout_height="0.3dp"
-                android:background="@color/dividerLine"></RelativeLayout>
+                android:background="@color/dividerLine"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -160,7 +152,7 @@
                 android:id="@+id/divider3"
                 android:layout_width="match_parent"
                 android:layout_height="0.3dp"
-                android:background="@color/dividerLine"></RelativeLayout>
+                android:background="@color/dividerLine" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -300,7 +292,7 @@
                 android:id="@+id/divider6"
                 android:layout_width="match_parent"
                 android:layout_height="0.3dp"
-                android:background="@color/dividerLine"></RelativeLayout>
+                android:background="@color/dividerLine" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -331,12 +323,12 @@
                 android:id="@+id/divider7"
                 android:layout_width="match_parent"
                 android:layout_height="0.3dp"
-                android:background="@color/dividerLine"></RelativeLayout>
+                android:background="@color/dividerLine" />
 
             <RelativeLayout
                 android:id="@+id/finalPadding"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"></RelativeLayout>
+                android:layout_height="30dp" />
 
 
         </LinearLayout>
