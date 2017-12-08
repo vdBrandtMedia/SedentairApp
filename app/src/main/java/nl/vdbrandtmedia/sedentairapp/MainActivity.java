@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setAlarmManager(15,10);
+                setAlarmManager(13,6);
             }
         });
 
