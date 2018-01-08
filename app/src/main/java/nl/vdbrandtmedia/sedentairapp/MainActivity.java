@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void menuButtonClick(View v) {
         switch (v.getId()) {
-            case R.id.settingBtn:
+            case R.id.settingBtn2:
                 newIntent(new Intent(context, Settings.class));
                 break;
             case R.id.scheduleBtn:
