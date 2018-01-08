@@ -28,74 +28,6 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:visibility="gone">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <Button
-                android:text="Settings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/settingBtn2"
-                android:elevation="1dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:textSize="12sp"
-                android:onClick="menuButtonClick"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:textColor="#222" />
-
-            <Button
-                android:text="Schedule"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/scheduleBtn2"
-                android:elevation="1dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:textSize="12sp"
-                android:onClick="menuButtonClick"
-                android:layout_marginTop="19dp"
-                android:layout_below="@+id/ErgonomicsBtn2"
-                android:layout_centerHorizontal="true"
-                android:textColor="#222" />
-
-            <Button
-                android:text="Ergonomics"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/ErgonomicsBtn2"
-                android:elevation="1dp"
-                android:layout_marginRight="16dp"
-                android:textSize="12sp"
-                android:onClick="menuButtonClick"
-                android:layout_marginTop="22dp"
-                android:layout_below="@+id/settingBtn2"
-                android:layout_alignStart="@+id/scheduleBtn2"
-                android:textColor="#222" />
-
-            <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="53dp" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="1"
         android:layout_alignParentBottom="true"
@@ -106,10 +38,10 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="1">
+            android:weightSum="1"
+            tools:ignore="DisableBaselineAlignment">
 
             <RelativeLayout
-                android:onClick="menuButtonClick"
                 android:layout_width="match_parent"
                 android:layout_weight=".5"
                 android:paddingLeft="28dp"
@@ -118,7 +50,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="6dp"
                 android:layout_height="180dp"
-                android:id="@+id/ErgonomicsBtn">
+                android:id="@+id/ErgonomicsBtn"
+                android:onClick="menuButtonClick">
 
                 <TextView
                     android:text="Ergonomics"
@@ -134,13 +67,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/home_ergonomics"
-                    android:id="@+id/imageView2"
-                    android:layout_alignTop="@+id/textView4" />
+                    android:id="@+id/ergoIco"
+                    android:layout_alignTop="@+id/textView4"
+                    android:contentDescription="Ergonomics" />
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:onClick="menuButtonClick"
                 android:layout_width="match_parent"
                 android:layout_weight=".5"
                 android:paddingLeft="32dp"
@@ -149,7 +82,8 @@
                 android:layout_marginLeft="6dp"
                 android:layout_marginRight="16dp"
                 android:layout_height="180dp"
-                android:id="@+id/scheduleBtn">
+                android:id="@+id/scheduleBtn"
+                android:onClick="menuButtonClick">
 
                 <TextView
                     android:text="Calendar"
@@ -167,8 +101,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/home_calendar"
-                    android:id="@+id/imageView3"
-                    android:layout_below="@+id/textView5" />
+                    android:id="@+id/CalendarIco"
+                    android:layout_below="@+id/textView5"
+                    android:contentDescription="Calendar"/>
 
             </RelativeLayout>
 
@@ -185,80 +120,85 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="12dp"
-                android:layout_height="120dp">
+                android:layout_height="120dp"
+                tools:ignore="UselessParent">
 
                 <TextView
                     android:text="Steps set today"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="43dp"
+                    android:layout_marginStart="36dp"
                     android:id="@+id/textView8"
+                    android:layout_marginTop="31dp"
+                    android:textColor="#6975ec"
                     android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="29dp"
-                    android:textColor="#6975ec" />
-
-                <TextView
-                    android:text="12345"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="39dp"
-                    android:id="@+id/textView13"
-                    android:textColor="#6975ec"
-                    android:textSize="24sp"
-                    android:layout_alignBaseline="@+id/textView8"
-                    android:layout_alignBottom="@+id/textView8"
-                    android:layout_alignParentEnd="true" />
-
-                <TextView
-                    android:text="123456"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView14"
-                    android:textColor="#6975ec"
-                    android:textSize="24sp"
-                    android:layout_alignTop="@+id/textView9"
-                    android:layout_alignStart="@+id/textView13" />
+                    android:layout_alignParentStart="true" />
 
                 <TextView
                     android:text="Daily average"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView9"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="14dp"
                     android:textColor="#6975ec"
-                    android:layout_below="@+id/textView13"
+                    android:layout_below="@+id/tv_steps"
                     android:layout_alignStart="@+id/textView8" />
+
+                <TextView
+                    android:text="150"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_daily_steps"
+                    android:textColor="#6975ec"
+                    android:textSize="24sp"
+                    android:layout_alignTop="@+id/textView9"
+
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="150dp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="-5dp" />
+
+                <TextView
+                    android:text="0"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_steps"
+                    android:textColor="#6975ec"
+                    android:textSize="24sp"
+                    android:layout_width="150dp"
+                    android:gravity="center_horizontal"
+                    android:layout_alignTop="@+id/textView8"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="-5dp" />
             </RelativeLayout>
 
 
 
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:baselineAligned="false"
+        android:layout_alignParentStart="true"
+        android:paddingTop="16dp"
+        android:paddingBottom="66dp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:text="Tip of the day"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="16dp"
-            android:paddingLeft="16dp"
-            android:baselineAligned="false"
-            android:layout_marginTop="40dp">
+            android:id="@+id/textView15"
+            android:layout_marginBottom="8dp" />
 
-            <TextView
-                android:text="Tip of the day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView15"
-                android:layout_weight="1"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:text="Make sure that the weight of your arms is supported at all times. If your arms are not supported, the muscles of your neck and shoulders will be crying by the end of the day."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView16"
-                android:layout_weight="1" />
-        </LinearLayout>
-
+        <TextView
+            android:text="Make sure that the weight of your arms is supported at all times. If your arms are not supported, the muscles of your neck and shoulders will be crying by the end of the day."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView16" />
     </LinearLayout>
 </RelativeLayout>

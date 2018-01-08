@@ -40,7 +40,7 @@ public class Config {
         SharedPreferences.Editor edit = myPreferences.edit();
         edit.clear();
         edit.putString(targetString, newString);
-        edit.commit();
+        edit.apply();
     }
 
     static String readSharedPreferences(Context context, String targetString) {
