@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardBackgroundColor="@android:color/transparent"
-    android:layout_marginBottom="5dp"
     card_view:cardPreventCornerOverlap="false"
-    app:cardElevation="0dp">
+    app:cardElevation="0dp"
+    android:layout_marginBottom="-1dp">
 
     <LinearLayout
         android:orientation="vertical"
@@ -26,7 +26,7 @@
             <TextView
                 android:id="@+id/day"
                 android:text="Monday"
-                android:textColor="@android:color/white"
+                android:textColor="@color/theme1Text"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="false"
                 android:layout_alignParentEnd="false"
@@ -50,7 +50,8 @@
                 android:layout_alignParentBottom="false"
                 android:layout_marginStart="94dp"
                 android:layout_alignParentLeft="true"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="@color/theme1Text" />
 
         </RelativeLayout>
 
@@ -69,7 +70,8 @@
                 android:gravity="center_vertical"
                 android:text="Meeting"
                 android:textSize="16sp"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/theme1Text" />
 
             <ImageView
                 android:layout_height="24dp"
@@ -87,7 +89,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0.3dp"
-            android:background="@color/dividerLine"/>
+            android:background="@color/dividerLine"
+            android:visibility="gone" />
 
     </LinearLayout>
 

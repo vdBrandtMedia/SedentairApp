@@ -2,7 +2,7 @@
 
         <style name="AppTheme.GradientBg1" parent="AppTheme">
                 <item name="android:windowBackground">@drawable/bg_gradient_1</item>
-                <item name="android:textColor">@color/theme1Text</item>
+                <!--<item name="android:textColor">@color/theme1Text</item>-->
 
                 <!-- checkbox style -->
                 <item name="colorControlNormal">#fff</item>

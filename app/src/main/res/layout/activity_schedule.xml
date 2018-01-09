@@ -19,7 +19,9 @@
         app:fabSize="normal"
         app:layout_anchorGravity="bottom|right|end"
         app:srcCompat="@drawable/plus_icon_small_blue"
-        app:backgroundTint="#fff" />
+        app:backgroundTint="#fff"
+        android:id="@+id/scheduleAddButton"
+        android:onClick="addScheduleItem"/>
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -34,7 +36,9 @@
             android:layout_marginRight="16dp"
             android:background="@android:color/transparent"
             android:onClick="menuButtonClick"
-            app:srcCompat="?attr/actionModeCloseDrawable" />
+            app:srcCompat="?attr/actionModeCloseDrawable"
+            android:contentDescription=""
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/toolbarTitle"
@@ -50,15 +54,82 @@
 
     <!-- A RecyclerView with some commonly used attributes -->
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparentBlack"
+        android:id="@+id/scheduleInputBlock">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_block"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="150dp"
+            tools:ignore="UselessParent">
+
+            <TextView
+                android:text="Enter schedule name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView6"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/newScheduleName"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:hint="Schedule name" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:onClick="continueScheduleAdd"
+                    android:text="Continue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:onClick="closeScheduleItem"
+                    android:text="Close"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button2"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp">
+        android:layout_marginTop="100dp"
+        android:id="@+id/scheduleScrollView">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:context=".MyActivity">
 
             <android.support.v7.widget.RecyclerView

@@ -2,7 +2,9 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#3F51B5</color>
+
+    <color name="transparentBlack">#80000000</color>
 
     <!--Theme 1-->
     <color name="theme1Text">#fff</color>

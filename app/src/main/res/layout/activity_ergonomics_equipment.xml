@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:orientation="vertical"
@@ -25,7 +26,8 @@
                 android:background="@drawable/ergonomics_equipment"
                 android:layout_marginBottom="24dp"
                 android:textSize="24sp"
-                android:layout_height="140dp" />
+                android:layout_height="140dp"
+                android:textColor="@color/theme1Text" />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -40,13 +42,15 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textStyle="normal|bold"
-                    android:layout_marginBottom="16dp" />
+                    android:layout_marginBottom="16dp"
+                    android:textColor="@color/theme1Text" />
 
                 <TextView
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut laboris nisi ut aliquip ex ea commodo consequat."
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView13" />
+                    android:id="@+id/textView13"
+                    android:textColor="@color/theme1Text" />
             </LinearLayout>
 
         </LinearLayout>

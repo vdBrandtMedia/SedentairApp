@@ -39,17 +39,19 @@ public class Config {
         edit.apply();
     }
 
-    static void writeMultiplePreferences(Context context, String[][] targetString, String[][] newString) {
+    static void writeMultiplePreferences(Context context, ArrayList<String> targetArray, ArrayList<String> valueArray) {
         if (!initConfig) {
             initConfig(context);
         }
-        SharedPreferences.Editor edit = myPreferences.edit();
-        String[] arrayOfString = { "Hello", "people", "hello", "world!" };
 
-        for (int i = 0; i < targetString.length; i++){
-            edit.clear();
-            edit.putString(targetString[i][0], newString[i][1]);
-            edit.apply();
+        if (targetArray.size() == valueArray.size()){
+            for (int i = 0; i < targetArray.size(); i++) {
+                SharedPreferences.Editor edit = myPreferences.edit();
+                edit.clear();
+                edit.putString(targetArray.get(i), valueArray.get(i));
+                edit.commit();
+                Log.i("WriteMultiple sp","added row " + targetArray.get(i) + " " +  valueArray.get(i));
+            }
         }
     }
 
@@ -68,7 +70,7 @@ public class Config {
     }
 
 
-    static SharedPreferences getPreferences(Context context){
+    static SharedPreferences getPreferences(Context context) {
         return myPreferences;
     }
     /* Example of getting and writing data
