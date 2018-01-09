@@ -15,15 +15,15 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TimePicker;
 import android.text.format.DateFormat;
-import android.widget.Toast;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -32,10 +32,8 @@ import java.util.Objects;
 public class Schedule extends AppCompatActivity implements
         DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    Button button;
-    ArrayList<String> targetArray = new ArrayList<>();
-    ArrayList<String> valueArray = new ArrayList<>();
 
+    String scheduleItemString;
 
     int day, month, year, hour, minute;
     int dayFinal, monthFinal, yearFinal, hourFinal, minuteFinal;
@@ -43,6 +41,7 @@ public class Schedule extends AppCompatActivity implements
     RelativeLayout scheduleInput;
     EditText newScheduleName;
     ScrollView scrollView;
+    RecyclerView recList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +58,7 @@ public class Schedule extends AppCompatActivity implements
         scheduleInput = (RelativeLayout) findViewById(R.id.scheduleInputBlock);
         scheduleInput.setVisibility(View.GONE);
 
-        RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
+        recList = (RecyclerView) findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -67,18 +66,8 @@ public class Schedule extends AppCompatActivity implements
 
         setTitle("Schedule");
 
-        for (int i = 0; i < 3; i++) {
-            targetArray.add("scheduleName" + i);
-            valueArray.add("Meeting");
-            targetArray.add("scheduleTime" + i);
-            valueArray.add(i + ":00");
-            targetArray.add("scheduleDay" + i);
-            valueArray.add("Monday");
-            targetArray.add("scheduleBool" + i);
-            valueArray.add("true");
-        }
-
-        Config.writeMultiplePreferences(this, targetArray, valueArray);
+        //scheduleItemString = "Meeting,13:00,Monday,true,Meeting 2,10:00,Tuesday,true,Meeting 3,18:00,Saturday,true";
+        //Config.writeSharedPreferences(this, "scheduleItemString", scheduleItemString);
 
         ScheduleAdapter ca = new ScheduleAdapter(createList(getScheduleList()));
         recList.setAdapter(ca);
@@ -130,50 +119,35 @@ public class Schedule extends AppCompatActivity implements
 
     public String[][] getScheduleList() {
 
+        String getScheduleItemString = Config.readSharedPreferences(this, "scheduleItemString");
+        Log.i("scheduleItemString", "value: " + getScheduleItemString);
+        String[] scheduleValueArray = getScheduleItemString.split(",");
+
+
         //ArrayList<String> arrayList = new ArrayList<String>();
-        String[][] arrayList = new String[valueArray.size() / 4][4];
-        int h = 0;
+        String[][] arrayList = new String[scheduleValueArray.length / 4][4];
+        int h = 1;
         int j = 0;
-        for (int i = 0; i < 20 / 4; i++) {
+        for (int i = 0; i < 20; i++) {
 
-            //set variable for implementation
-            String scheduleName = Config.readSharedPreferences(this, "scheduleName" + i);
-            Log.i("test Read", "val: " + scheduleName);
-            String scheduleTime = Config.readSharedPreferences(this, "scheduleTime" + i);
-            Log.i("test Read", "val: " + scheduleTime);
-            String scheduleDay = Config.readSharedPreferences(this, "scheduleDay" + i);
-            Log.i("test Read", "val: " + scheduleDay);
-            String scheduleBool = Config.readSharedPreferences(this, "scheduleBool" + i);
-            Log.i("test Read", "val: " + scheduleBool);
-
-            //if (scheduleName != null && scheduleTime != null && scheduleDay != null && scheduleBool != null) {
-            //this adds an element to the String[][][]
-            if (h < valueArray.size()) {
-                arrayList[i][j] = valueArray.get(h);
-                j++;
-                h++;
-                arrayList[i][j] = valueArray.get(h);
-                j++;
-                h++;
-                arrayList[i][j] = valueArray.get(h);
-                j++;
-                h++;
-                arrayList[i][j] = valueArray.get(h);
-                j = 0;
-                h++;
+            if (scheduleValueArray.length > 2) {
+                if (h < scheduleValueArray.length) {
+                    arrayList[i][j] = scheduleValueArray[h];
+                    j++;
+                    h++;
+                    arrayList[i][j] = scheduleValueArray[h];
+                    j++;
+                    h++;
+                    arrayList[i][j] = scheduleValueArray[h];
+                    j++;
+                    h++;
+                    arrayList[i][j] = scheduleValueArray[h];
+                    j = 0;
+                    h++;
+                }
             }
-//            arrayList[i][j] = scheduleName;
-//            j++;
-//            arrayList[i][j] = scheduleTime;
-//            j++;
-//            arrayList[i][j] = scheduleDay;
-//            j++;
-//            arrayList[i][j] = scheduleBool;
-
-
         }
 //        Log.i("getScheduleList", "Data: " + Arrays.deepToString(arrayList));
-//        Log.i("getScheduleList", "Value: " + Config.readSharedPreferences(this, "scheduleTime0"));
 
         return arrayList;
     }
@@ -196,7 +170,7 @@ public class Schedule extends AppCompatActivity implements
         scheduleInput.setVisibility(View.VISIBLE);
     }
 
-    public void continueScheduleAdd(View v){
+    public void continueScheduleAdd(View v) {
         addScheduleName(newScheduleName);
     }
 
@@ -218,7 +192,6 @@ public class Schedule extends AppCompatActivity implements
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, this, year, month, day);
             datePickerDialog.show();
         } else {
-            //Toast.makeText(this, "Enter a schedule name", Toast.LENGTH_SHORT).show();
             Snackbar mySnackbar = Snackbar.make(findViewById(R.id.activity_schedule),
                     "Enter a schedule name to continue \r\n", Snackbar.LENGTH_SHORT);
 
@@ -237,6 +210,7 @@ public class Schedule extends AppCompatActivity implements
         hour = c.get(Calendar.HOUR_OF_DAY);
         minute = c.get(Calendar.MINUTE);
 
+
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, this,
                 hour, minute, DateFormat.is24HourFormat(this));
         timePickerDialog.show();
@@ -250,6 +224,25 @@ public class Schedule extends AppCompatActivity implements
         newScheduleName.setText("");
         scrollView.setVisibility(View.VISIBLE);
 
-        Log.i("Time set", " day: " + dayFinal + " hour: " + hourFinal + " minte: " + minuteFinal + " scheduleName: " + scheduleName);
+        int yearValue = Calendar.getInstance().get(Calendar.YEAR);
+
+        Log.i("Time set", "year1: " + yearFinal + " month: " + monthFinal + " day: " + dayFinal + " hour: " + hourFinal + " minute: " + minuteFinal + " scheduleName: " + scheduleName);
+
+//        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
+
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, dayFinal);
+        calendar.set(Calendar.MONTH, monthFinal);
+        calendar.set(Calendar.YEAR, yearValue);
+        String weekDay = dayFormat.format(calendar.getTime());
+        Log.i("DayOfWeek", "value: " + weekDay);
+
+        String getScheduleItemString = Config.readSharedPreferences(this, "scheduleItemString");
+        getScheduleItemString += "," + scheduleName + "," + hourFinal + ":" + minuteFinal + "," + weekDay + ",true";
+        Config.writeSharedPreferences(this, "scheduleItemString", getScheduleItemString);
+
+        ScheduleAdapter ca = new ScheduleAdapter(createList(getScheduleList()));
+        recList.setAdapter(ca);
     }
 }
