@@ -20,7 +20,8 @@
             android:id="@+id/homeButton"
             android:background="@android:color/transparent"
             android:layout_marginRight="16dp"
-            android:onClick="menuButtonClick"/>
+            android:onClick="menuButtonClick"
+            android:contentDescription="back to home" />
 
         <TextView
             android:id="@+id/toolbarTitle"
@@ -45,7 +46,8 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="100dp">
+            android:layout_marginTop="100dp"
+            tools:ignore="UselessParent">
 
 
             <LinearLayout
@@ -62,6 +64,8 @@
                     android:gravity="center"
                     android:background="@drawable/ergonomics_sitting_pose"
                     android:layout_marginBottom="16dp"
+                    android:textSize="18sp"
+                    android:onClick="menuButtonClick"
                     android:layout_height="110dp" />
 
                 <TextView
@@ -71,6 +75,8 @@
                     android:gravity="center"
                     android:background="@drawable/ergonomics_equipment"
                     android:layout_marginBottom="16dp"
+                    android:textSize="18sp"
+                    android:onClick="menuButtonClick"
                     android:layout_height="110dp" />
 
                 <TextView
@@ -80,33 +86,30 @@
                     android:gravity="center"
                     android:background="@drawable/ergonomics_standing_pose"
                     android:layout_marginBottom="16dp"
+                    android:textSize="18sp"
+                    android:onClick="menuButtonClick"
                     android:layout_height="110dp" />
 
                 <TextView
-                    android:text="Sitting Pose"
+                    android:text="Organise your workspace"
                     android:layout_width="match_parent"
-                    android:id="@+id/Sitting2"
+                    android:id="@+id/Workspace"
                     android:gravity="center"
-                    android:background="@drawable/ergonomics_sitting_pose"
+                    android:background="@drawable/organise_workspace"
                     android:layout_marginBottom="16dp"
+                    android:textSize="18sp"
+                    android:onClick="menuButtonClick"
                     android:layout_height="110dp" />
 
                 <TextView
-                    android:text="Equipment"
+                    android:text="Taking breaks"
                     android:layout_width="match_parent"
-                    android:id="@+id/Equipment2"
+                    android:id="@+id/Breaks"
                     android:gravity="center"
-                    android:background="@drawable/ergonomics_equipment"
-                    android:layout_marginBottom="16dp"
-                    android:layout_height="110dp" />
-
-                <TextView
-                    android:text="Standing Pose"
-                    android:layout_width="match_parent"
-                    android:id="@+id/Standing2"
-                    android:gravity="center"
-                    android:background="@drawable/ergonomics_standing_pose"
-                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/taking_breaks"
+                    android:layout_marginBottom="64dp"
+                    android:textSize="18sp"
+                    android:onClick="menuButtonClick"
                     android:layout_height="110dp" />
 
 

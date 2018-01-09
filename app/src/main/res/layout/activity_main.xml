@@ -145,9 +145,9 @@
                     android:layout_alignStart="@+id/textView8" />
 
                 <TextView
-                    android:text="150"
+                    android:text="0"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_daily_steps"
+                    android:id="@+id/tv_steps_average"
                     android:textColor="#6975ec"
                     android:textSize="24sp"
                     android:layout_alignTop="@+id/textView9"

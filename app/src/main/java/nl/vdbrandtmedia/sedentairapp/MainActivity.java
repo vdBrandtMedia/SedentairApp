@@ -23,7 +23,11 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.text.SimpleDateFormat;
 
@@ -39,9 +43,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private RemoteViews remoteViews;
 
     SensorManager sensorManager;
-    private int milestoneStep;
     int todayStep, startingStep;
-    TextView tv_steps;
+    TextView tv_steps, tv_steps_average;
     boolean running = false;
 
     @Override
@@ -70,17 +73,46 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         tv_steps = (TextView) findViewById(R.id.tv_steps);
+        tv_steps_average = (TextView) findViewById(R.id.tv_steps_average);
         todayStep = -1;
-        startingStep = 0;
-        if (Config.readSharedPreferences(this, today()) == "") {
-            todayStep = 0;
-            Log.i("startupValue", "todayStep = 0 / value: " + Config.readSharedPreferences(this, today()));
-            tv_steps.setText("0");
+
+        //set the startingStep
+        if (Config.readSharedPreferencesInt(this, today() + "start") < 1) {
+            //        Log.i("Day", "dayvalue tday = " + Config.readSharedPreferencesInt(this, today()));
+            //        Log.i("Day", "dayvalue yday = " + Config.readSharedPreferencesInt(this, yesterday(1)));
+            startingStep = Config.readSharedPreferencesInt(this, yesterday(1));
+            if (startingStep < 1) {
+                startingStep = 1;
+            }
+            Config.writeSharedPreferencesInt(this, today() + "start", startingStep);
+            Log.i("Tag", "startingStep = " + startingStep);
         } else {
-            todayStep = Integer.parseInt(Config.readSharedPreferences(this, today()));
-            Log.i("startupValue", "todayStep = " + todayStep);
-            tv_steps.setText(Integer.toString(todayStep));
+            startingStep = Config.readSharedPreferencesInt(this, today() + "start");
+            Log.i("Tag", "startingStep = " + startingStep);
         }
+        tv_steps.setText("" + Config.readSharedPreferencesInt(this, today()));
+
+//        if (Config.readSharedPreferencesInt(this, today()) < 1) {
+//            todayStep = 0;
+//            Log.i("startupValue", "todayStep = " + Config.readSharedPreferences(this, today()));
+//            tv_steps.setText("0");
+//        } else {
+//            todayStep = Config.readSharedPreferencesInt(this, today());
+//            Log.i("startupValue", "todayStep = " + todayStep);
+//            tv_steps.setText(Integer.toString(todayStep));
+//        }
+
+        //set average steps according to last week
+        List<Integer> averageStepList = new ArrayList<Integer>();
+        for (int i = 0; i < 6; i++) {
+            int averageStep = Config.readSharedPreferencesInt(this, yesterday(i));
+            if (averageStep > 0) {
+                averageStepList.add(averageStep);
+            }
+            Log.i("Average", "Dayvalue = " + averageStep + " " + yesterday(i));
+        }
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+        tv_steps_average.setText(decimalFormat.format(calculateAverage(averageStepList)));
     }
 
     @Override
@@ -151,51 +183,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (running) {
-
 //            tv_steps.setText(String.valueOf(Math.round(sensorEvent.values[0])));
 //            Config.writeSharedPreferences(this, "stepsToday", String.valueOf(Math.round(sensorEvent.values[0])));
 //            Log.d("Stepstoday: ", "Value; " + Config.readSharedPreferences(this, "stepsToday"));
 
             int totalStepSinceReboot = (int) sensorEvent.values[0];
-            Log.i("TotalSinceReboot", "TotalSinceReboot = " + totalStepSinceReboot);
-
-            //set the startingStep
-            if (startingStep == 0) {
-                if (Objects.equals(Config.readSharedPreferences(this, today() + "start"), "")) {
-                    startingStep = 1;
-                    Log.i("Tag", "todayStep = 0 / valuez: " + Config.readSharedPreferences(this, today() + "start"));
-                } else {
-                    startingStep = Integer.parseInt(Config.readSharedPreferences(this, today() + "start"));
-                }
-            }
-
-            if (todayStep == -1) {
-
-                //set the todayStep
-                if (Objects.equals(Config.readSharedPreferences(this, today()), "")) {
-                    todayStep = 0;
-                    Log.i("Tag", "todayStep = 0 / valuez: " + Config.readSharedPreferences(this, today()));
-                } else {
-                    todayStep = Integer.parseInt(Config.readSharedPreferences(this, today()));
-                }
-
-            } else {
-                if (todayStep > 0) {
-                    todayStep = Integer.parseInt(Config.readSharedPreferences(this, today()));
-                }
-            }
-
-            if (todayStep == 0) {
-                milestoneStep = totalStepSinceReboot;
-                Config.writeSharedPreferences(this, today() + "start", String.valueOf(totalStepSinceReboot));
-            } else {
-                //int additionStep = totalStepSinceReboot - milestoneStep;
-                Config.writeSharedPreferences(this, today(), String.valueOf(startingStep - todayStep));
-                milestoneStep = totalStepSinceReboot;
-
-                tv_steps.setText(String.valueOf(Math.round(startingStep - todayStep)));
-                Log.i("TAG", "Your today step now is " + Config.readSharedPreferences(this, today()));
-            }
+            Config.writeSharedPreferencesInt(this, today(), Math.round(totalStepSinceReboot - startingStep));
+            tv_steps.setText(String.valueOf(Math.round(totalStepSinceReboot - startingStep)));
+            Log.i("TAG", "Your today step now is " + Config.readSharedPreferencesInt(this, today()));
         }
     }
 
@@ -207,6 +202,28 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public String today() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(Calendar.getInstance().getTime());
+    }
+
+    private Date getDateYesterday(int days) {
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -days);
+        return cal.getTime();
+    }
+
+    private String yesterday(int days) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(getDateYesterday(days));
+    }
+
+    private double calculateAverage(List<Integer> marks) {
+        Integer sum = 0;
+        if (!marks.isEmpty()) {
+            for (Integer mark : marks) {
+                sum += mark;
+            }
+            return sum.doubleValue() / marks.size();
+        }
+        return Math.round(sum);
     }
 
     public void setAlarmManager(int day, int hour, int min) {

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="nl.vdbrandtmedia.sedentairapp">
 
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>﻿
-
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    ﻿
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,16 +23,22 @@
         <activity
             android:name=".Schedule"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".Ergonomics_home"
+        <activity
+            android:name=".Ergonomics_home"
             android:parentActivityName=".MainActivity" />
 
         <receiver android:name=".ButtonReciever">
             <intent-filter>
-                <action android:name="button_clicked"/>
+                <action android:name="button_clicked" />
             </intent-filter>
         </receiver>
-
         <receiver android:name=".NotificationReciever" />
+
+        <activity android:name=".ergonomics_sittingpose" />
+        <activity android:name=".ergonomics_equipment" />
+        <activity android:name=".ergonomics_standingpose" />
+        <activity android:name=".ergonomics_organiseworkspace" />
+        <activity android:name=".ergonomics_breaks"></activity>
     </application>
 
 </manifest>

@@ -10,25 +10,12 @@ import java.util.ArrayList;
 public class Config {
     private static SharedPreferences myPreferences;
     private static String prefValue = "prefValues";
-    public static boolean initConfig = false;
+    private static boolean initConfig = false;
     public static ArrayList<String> scheduleList = new ArrayList<String>();
 
     private static void initConfig(Context context) {
         myPreferences = context.getSharedPreferences(prefValue, Context.MODE_PRIVATE);
-        myPreferences.contains("");
-
-        for (int i = 1; i < 21; i++) {
-            if (myPreferences.contains("scheduleName" + i)) {
-                String mystring = "scheduleName" + i;
-                scheduleList.add(mystring); //this adds an element to the list.
-            }
-        }
-
-        for (String object : scheduleList) {
-            Log.d("set param list ", "value: " + object);
-            //todo: remove log
-        }
-
+        //myPreferences.contains("");
         initConfig = true;
     }
 
@@ -36,48 +23,54 @@ public class Config {
         if (!initConfig) {
             initConfig(context);
         }
-        myPreferences = context.getSharedPreferences(prefValue, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = myPreferences.edit();
         edit.clear();
         edit.putString(targetString, newString);
         edit.apply();
     }
 
+    static void writeSharedPreferencesInt(Context context, String targetString, int newString) {
+        if (!initConfig) {
+            initConfig(context);
+        }
+        SharedPreferences.Editor edit = myPreferences.edit();
+        edit.clear();
+        edit.putInt(targetString, newString);
+        edit.apply();
+    }
+
+    static void writeMultiplePreferences(Context context, String[][] targetString, String[][] newString) {
+        if (!initConfig) {
+            initConfig(context);
+        }
+        SharedPreferences.Editor edit = myPreferences.edit();
+        String[] arrayOfString = { "Hello", "people", "hello", "world!" };
+
+        for (int i = 0; i < targetString.length; i++){
+            edit.clear();
+            edit.putString(targetString[i][0], newString[i][1]);
+            edit.apply();
+        }
+    }
+
     static String readSharedPreferences(Context context, String targetString) {
         if (!initConfig) {
             initConfig(context);
         }
-        myPreferences = context.getSharedPreferences(prefValue, Context.MODE_PRIVATE);
         return myPreferences.getString(targetString, "");
     }
 
-    static ArrayList<String> getScheduleList(Context context) {
-        myPreferences = context.getSharedPreferences(prefValue, Context.MODE_PRIVATE);
-        myPreferences.contains("");
-
-        ArrayList<String> arrayList = new ArrayList<String>();
-        for (int i = 1; i < 21; i++) {
-            if (myPreferences.contains("scheduleName" + i)) {
-                //set variable for implementation
-                String myName  = myPreferences.getString("scheduleName" + i, "");
-                String myTime1 = myPreferences.getString("scheduleTime" + i, "");
-                String myTime2 = myPreferences.getString("scheduleDay" + i, "");
-                String myBool  = myPreferences.getString("scheduleBool" + i, "");
-
-                //this adds an element to the list.
-                arrayList.add(myName);
-                arrayList.add(myTime1);
-                arrayList.add(myTime2);
-                arrayList.add(myBool);
-
-                //check variable
-                Log.d("getScheduleList", "Value: " + myName);
-            }
+    static int readSharedPreferencesInt(Context context, String targetString) {
+        if (!initConfig) {
+            initConfig(context);
         }
-
-        return arrayList;
+        return myPreferences.getInt(targetString, 0);
     }
 
+
+    static SharedPreferences getPreferences(Context context){
+        return myPreferences;
+    }
     /* Example of getting and writing data
 
         Config.writeSharedPreferences(this, "value1", "shit");
