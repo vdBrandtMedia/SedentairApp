@@ -38,7 +38,7 @@
         <activity android:name=".ergonomics_equipment" />
         <activity android:name=".ergonomics_standingpose" />
         <activity android:name=".ergonomics_organiseworkspace" />
-        <activity android:name=".ergonomics_breaks"></activity>
+        <activity android:name=".ergonomics_breaks" />
     </application>
 
 </manifest>
