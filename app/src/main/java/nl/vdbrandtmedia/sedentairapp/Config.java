@@ -69,10 +69,10 @@ public class Config {
         return myPreferences.getInt(targetString, 0);
     }
 
-
     static SharedPreferences getPreferences(Context context) {
         return myPreferences;
     }
+
     /* Example of getting and writing data
 
         Config.writeSharedPreferences(this, "value1", "shit");

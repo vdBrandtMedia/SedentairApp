@@ -3,94 +3,99 @@
     xmlns:app="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     card_view:cardBackgroundColor="@android:color/transparent"
     card_view:cardPreventCornerOverlap="false"
     app:cardElevation="0dp"
-    android:layout_marginBottom="-1dp">
+    card_view:cardElevation="@dimen/cardview_sizes"
+    android:layout_height="80.3dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/dividerLine"
+        android:visibility="visible" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent">
+        android:layout_height="80dp"
+        android:background="@android:color/transparent"
+        android:weightSum="1.5">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:paddingTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="32dp">
-
-            <TextView
-                android:id="@+id/day"
-                android:text="Monday"
-                android:textColor="@color/theme1Text"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="false"
-                android:layout_alignParentEnd="false"
-                android:layout_width="120dp"
-                android:gravity="left"
-                android:textSize="20sp" />
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/scheduleBool"
-                android:gravity="center_vertical|end"
-                android:layout_alignParentEnd="true"
-                android:layout_alignBaseline="@+id/day" />
-
-            <TextView
-                android:id="@+id/time"
-                android:layout_height="wrap_content"
-                android:text="10:00"
-                android:layout_width="120dp"
-                android:layout_alignParentBottom="false"
-                android:layout_marginStart="94dp"
-                android:layout_alignParentLeft="true"
-                android:textSize="20sp"
-                android:textColor="@color/theme1Text" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
+        <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="32dp">
+            android:layout_height="match_parent"
+            app:ignore="UselessParent">
 
-            <TextView
-                android:id="@+id/timerName"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:gravity="center_vertical"
-                android:text="Meeting"
-                android:textSize="16sp"
-                android:layout_marginBottom="16dp"
-                android:textColor="@color/theme1Text" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_width="240dp">
+
+                    <TextView
+                        android:id="@+id/day"
+                        android:text="Monday"
+                        android:textColor="@color/theme1Text"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:textSize="20sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_width="110dp" />
+
+                    <TextView
+                        android:id="@+id/time"
+                        android:layout_height="wrap_content"
+                        android:text="10:00"
+                        android:layout_width="wrap_content"
+                        android:textSize="20sp"
+                        android:textColor="@color/theme1Text"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/day"
+                        android:layout_marginLeft="16dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_width="240dp">
+
+                    <TextView
+                        android:id="@+id/timerName"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center_vertical"
+                        android:text="Meeting"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="16dp"
+                        android:textColor="@color/theme1Text"
+                        android:layout_height="24dp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
             <ImageView
-                android:layout_height="24dp"
                 android:id="@+id/imageView"
-                android:gravity="center_vertical|end"
-                android:layout_marginRight="10dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
+                android:gravity="right|end"
                 android:contentDescription="CardNav"
                 card_view:srcCompat="@drawable/pen_icon"
-                android:layout_width="24dp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0.3dp"
-            android:background="@color/dividerLine"
-            android:visibility="gone" />
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="26dp"
+                android:layout_height="28dp" />
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -1,10 +1,12 @@
 package nl.vdbrandtmedia.sedentairapp;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,12 +17,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TimePicker;
 import android.text.format.DateFormat;
+import android.widget.Toast;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -43,6 +47,10 @@ public class Schedule extends AppCompatActivity implements
     ScrollView scrollView;
     RecyclerView recList;
 
+    DatabaseHelper myDb;
+    EditText editName, editSurname, editMarks, editTextId;
+    Button btnAddData, btnviewAll, btnDelete;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +65,10 @@ public class Schedule extends AppCompatActivity implements
         newScheduleName = (EditText) findViewById(R.id.newScheduleName);
         scheduleInput = (RelativeLayout) findViewById(R.id.scheduleInputBlock);
         scheduleInput.setVisibility(View.GONE);
+
+        myDb = new DatabaseHelper(this);
+        btnviewAll = (Button) findViewById(R.id.button_viewAll);
+        viewAll();
 
         recList = (RecyclerView) findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
@@ -73,33 +85,87 @@ public class Schedule extends AppCompatActivity implements
         recList.setAdapter(ca);
     }
 
+    public void DeleteData(String Name, String Time, String Day) {
+        Integer deletedRows = myDb.deleteData(Name, Time, Day);
+        if (deletedRows > 0)
+            Toast.makeText(Schedule.this, "Data Deleted", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(Schedule.this, "Data not Deleted", Toast.LENGTH_LONG).show();
+    }
+
+    public void AddData(final String Name, final String Time, final String Day) {
+        boolean isInserted = myDb.insertData(Name, Time, Day);
+        if (isInserted)
+            Toast.makeText(Schedule.this, "Data Inserted", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(Schedule.this, "Data not Inserted", Toast.LENGTH_LONG).show();
+    }
+
+    public void viewAll() {
+        btnviewAll.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Cursor res = myDb.getAllData();
+                        if (res.getCount() == 0) {
+                            // show message
+                            showMessage("Error", "Nothing found");
+                            return;
+                        }
+
+                        StringBuffer buffer = new StringBuffer();
+                        while (res.moveToNext()) {
+                            buffer.append("Id :" + res.getString(0) + "\n");
+                            buffer.append("Name :" + res.getString(1) + "\n");
+                            buffer.append("Day :" + res.getString(2) + "\n");
+                            buffer.append("Time :" + res.getString(3) + "\n");
+                            buffer.append("Bool :" + res.getString(4) + "\n\n");
+                        }
+
+                        // Show all data
+                        showMessage("Data", buffer.toString());
+                    }
+                }
+        );
+    }
+
+    public void showMessage(String title, String Message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(Message);
+        builder.show();
+    }
+
 
     private List createList(String[][] scheduleList) {
         List result = new ArrayList();
 
-        for (int i = 0; i < scheduleList.length; i++) {
-            if (!Objects.equals(scheduleList[i][0], "") &&
-                    !Objects.equals(scheduleList[i][1], "") &&
-                    !Objects.equals(scheduleList[i][2], "") &&
-                    !Objects.equals(scheduleList[i][3], "")) {
+//        for (int i = 0; i < scheduleList.length; i++) {
+//            if (!Objects.equals(scheduleList[i][0], "") &&
+//                    !Objects.equals(scheduleList[i][1], "") &&
+//                    !Objects.equals(scheduleList[i][2], "") &&
+//                    !Objects.equals(scheduleList[i][3], "")) {
+//
+//                ScheduleAdapter.ScheduleInfo ci = new ScheduleAdapter.ScheduleInfo();
+//                ci.day = scheduleList[i][0];
+//                ci.time = scheduleList[i][1];
+//                ci.timerDay = scheduleList[i][2];
+//                ci.timerBool = Boolean.valueOf(scheduleList[i][3]);
+//                result.add(ci);
+//            }
+//        }
 
-                ScheduleAdapter.ScheduleInfo ci = new ScheduleAdapter.ScheduleInfo();
-                ci.day = scheduleList[i][0];
-                ci.time = scheduleList[i][1];
-                ci.timerDay = scheduleList[i][2];
-                ci.timerBool = Boolean.valueOf(scheduleList[i][3]);
-                result.add(ci);
-            }
+        Cursor res = myDb.getAllData();
+
+        while (res.moveToNext()) {
+            ScheduleAdapter.ScheduleInfo ci = new ScheduleAdapter.ScheduleInfo();
+            ci.name =  res.getString(1);
+            ci.day = res.getString(2);
+            ci.time = res.getString(3);
+            result.add(ci);
         }
 
-//        for (int i = 1; i <= size; i++) {
-//            ScheduleAdapter.ScheduleInfo ci = new ScheduleAdapter.ScheduleInfo();
-//            ci.day = ScheduleAdapter.ScheduleInfo.DAY_PREFIX;
-//            ci.time = ScheduleAdapter.ScheduleInfo.TIME_PREFIX;
-//            ci.timerDay = ScheduleAdapter.ScheduleInfo.TIMERDAY_PREFIX + i;
-//            ci.timerBool = ScheduleAdapter.ScheduleInfo.TIMERBOOL_PREFIX;
-//            result.add(ci);
-//        }
 
         return result;
     }
@@ -236,13 +302,18 @@ public class Schedule extends AppCompatActivity implements
         calendar.set(Calendar.MONTH, monthFinal);
         calendar.set(Calendar.YEAR, yearValue);
         String weekDay = dayFormat.format(calendar.getTime());
-        Log.i("DayOfWeek", "value: " + weekDay);
+        Log.i("DayOfWeek", "string value: " + weekDay);
+        Log.i("DayOfWeek", "int    value: " + Calendar.DAY_OF_MONTH);
 
-        String getScheduleItemString = Config.readSharedPreferences(this, "scheduleItemString");
-        getScheduleItemString += "," + scheduleName + "," + hourFinal + ":" + minuteFinal + "," + weekDay + ",true";
-        Config.writeSharedPreferences(this, "scheduleItemString", getScheduleItemString);
+        //String getScheduleItemString = Config.readSharedPreferences(this, "scheduleItemString");
+        //getScheduleItemString += "," + scheduleName + "," + hourFinal + ":" + minuteFinal + "," + weekDay + ",true";
+        //Config.writeSharedPreferences(this, "scheduleItemString", getScheduleItemString);
+
+        AddData(scheduleName, Integer.toString(hourFinal) + ":" + Integer.toString(minuteFinal), weekDay);
 
         ScheduleAdapter ca = new ScheduleAdapter(createList(getScheduleList()));
         recList.setAdapter(ca);
+
+
     }
 }
